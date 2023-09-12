@@ -1,0 +1,80 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Documents;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
+using System.Windows.Shapes;
+
+namespace WpfApp1
+{
+    /// <summary>
+    /// Logika interakcji dla klasy MainWindow.xaml
+    /// </summary>
+    public partial class MainWindow : Window
+    {
+        public MainWindow()
+        {
+            InitializeComponent();
+        }
+
+        private void lblBok_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (int.TryParse(lblBok.Text, out int bok) && (bok>0))
+            {
+                int pole = bok * bok;
+                int obwod = bok + bok + bok + bok;
+                if (obwod != null || pole != null)
+                {
+                    lblObwod.Text = obwod.ToString();
+                    lblPole.Text = pole.ToString();
+                }
+            }
+            else { 
+                lblPole.Text = "Błąd";
+                lblObwod.Text = "Błąd";
+            }
+            
+          
+
+        }
+
+        private void Wyczysc_Click(object sender, RoutedEventArgs e)
+        {
+            lblBok.Text = null;
+            lblPole.Text = null;
+            lblObwod.Text = null;
+        }
+    }
+}
+---------------------------------------------------------------------------------------------
+
+<Window x:Class="WpfApp1.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfApp1"
+        mc:Ignorable="d"
+        Title="Kwadrat" Height="450" Width="800">
+    <Grid>
+        <Button Content="Wyczyść" Name ="Wyczysc"  HorizontalAlignment="Center" Margin="0,305,0,0" Width="100px" VerticalAlignment="Top" Click="Wyczysc_Click"/>
+        <Label Content="Bok:" HorizontalAlignment="Left" Margin="143,153,0,0" VerticalAlignment="Top"/>
+        <Label Content="Pole:" HorizontalAlignment="Left" Margin="143,191,0,0" VerticalAlignment="Top"/>
+        <Label Content="Obwód:" HorizontalAlignment="Left" Margin="143,222,0,0" VerticalAlignment="Top"/>
+        <Label Name ="lblBlad"  Content="Wpisz wymiar boku:" HorizontalAlignment="Left" Margin="457,135,0,0" VerticalAlignment="Top" Background="White" Foreground="Red"/>
+        <TextBox Name ="lblBok" HorizontalAlignment="Left" Margin="214,161,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" IsEnabled="True" TextChanged="lblBok_TextChanged"/>
+        <TextBox Name ="lblPole" HorizontalAlignment="Left" Margin="214,195,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" IsEnabled="False"/>
+        <TextBox Name ="lblObwod"  HorizontalAlignment="Left" Margin="214,226,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" IsEnabled="False"/>
+
+
+
+    </Grid>
+</Window>
